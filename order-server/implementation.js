@@ -1,38 +1,29 @@
 const db = require('./db');
-exports.makePurchase = async (req, res) => {
-  const { book_id } = req.params;
 
-  // If the ID is not a number, reject the purchase
-  if (!/^\d+$/.test(book_id)) {
-    return res.status(422).json({ message: 'Book ID must be a number' });
-  }
+exports.purchase = async (req, res) => {
+  const bookId = req.params.book_id;
 
-  // Query the book from the SQLite database
-  db.get('SELECT * FROM books WHERE book_id = ?', [book_id], (err, row) => {
-    if (err) {
-      return res.status(500).json({ error: 'Failed to query the database' });
-    }
-
-    if (!row) {
-      return res.status(404).json({ message: 'Book with the specified ID does not exist' });
-    }
-
-    // Extract the book information from the database
-    const book = row;
-
-    if (book.quantity <= 0) {
-      return res.json({ success: false, message: 'Book with the specified ID is out of stock' });
-    }
-
-    // Update the book quantity in the SQLite database
-    db.run('UPDATE books SET quantity = quantity - 1 WHERE book_id = ?', [book_id], (updateErr) => {
-      if (updateErr) {
-        return res.status(500).json({ error: 'Failed to update the database' });
+  db.serialize(() => {
+    // Check if the book is in stock
+    db.get('SELECT stock FROM books WHERE id = ?', [bookId], (err, book) => {
+      if (err) {
+        console.error(err.message);
+        res.status(500).json({ error: 'Failed to check stock availability.' });
+      } else if (!book) {
+        res.status(404).json({ error: 'Book not found.' });
+      } else if (book.stock <= 0) {
+        res.status(400).json({ error: 'Book is out of stock.' });
+      } else {
+        // Update stock and perform the purchase
+        db.run('UPDATE books SET stock = stock - 1 WHERE id = ?', [bookId], (updateErr) => {
+          if (updateErr) {
+            console.error(updateErr.message);
+            res.status(500).json({ error: 'Failed to update book stock.' });
+          } else {
+            res.json({ message: 'Book purchase successful' });
+          }
+        });
       }
-
-      return res.json({ success: true, message: 'Book with the specified ID purchased' });
     });
   });
-
-  
-};
+}
