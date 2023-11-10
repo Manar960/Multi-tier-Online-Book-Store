@@ -4,6 +4,6 @@ const implementation = require('./implementation');
 
 router.get('/info/:item_number', implementation.info);
 router.get('/search/:topic', implementation.searchBooks);
-router.put('/purchase/:item_number', implementation.purchase);
+router.post('/buy/:item_number', implementation.purchase);
 
 module.exports = router;
