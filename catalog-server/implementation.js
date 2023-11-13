@@ -22,3 +22,37 @@ const db = require('./db');
     });
   };
 
+  exports.update = async (req, res) => {
+    const { item_number } = req.params;
+    const { cost, quantity } = req.body;
+  
+    if (!cost && !quantity) {
+      res.status(400).json({ error: 'Missing parameters for update.' });
+      return;
+    }
+  
+    const updateQuery = 'UPDATE books SET ' +
+      (cost ? 'cost = ? ' : '') +
+      (cost && quantity ? ', ' : '') +
+      (quantity ? 'quantity = ? ' : '') +
+      'WHERE id = ?';
+  
+    const params = [];
+    if (cost) params.push(cost);
+    if (quantity) params.push(quantity);
+    params.push(item_number);
+  
+    db.run(updateQuery, params, function (err) {
+      if (err) {
+        res.status(500).json({ error: 'Failed to update data in the catalog.' });
+        return;
+      }
+  
+      if (this.changes === 0) {
+        res.status(404).json({ error: 'Book not found for update.' });
+      } else {
+        res.json({ status: 'success' });
+      }
+    });
+  };
+
