@@ -1,29 +1,28 @@
-const db = require('./db');
+const axios = require('axios');
+
+const catalogServiceUrl = 'http://localhost:3004';
 
 exports.purchase = async (req, res) => {
   const bookId = req.params.book_id;
 
-  db.serialize(() => {
+  try {
     // Check if the book is in stock
-    db.get('SELECT stock FROM books WHERE id = ?', [bookId], (err, book) => {
-      if (err) {
-        console.error(err.message);
-        res.status(500).json({ error: 'Failed to check stock availability.' });
-      } else if (!book) {
-        res.status(404).json({ error: 'Book not found.' });
-      } else if (book.stock <= 0) {
-        res.status(400).json({ error: 'Book is out of stock.' });
-      } else {
-        // Update stock and perform the purchase
-        db.run('UPDATE books SET stock = stock - 1 WHERE id = ?', [bookId], (updateErr) => {
-          if (updateErr) {
-            console.error(updateErr.message);
-            res.status(500).json({ error: 'Failed to update book stock.' });
-          } else {
-            res.json({ message: 'Book purchase successful' });
-          }
-        });
-      }
-    });
-  });
-}
+    const response = await axios.get(`${catalogServiceUrl}/info/${bookId}`);
+    const book = response.data.item;
+
+    if (!book) {
+      res.status(404).json({ error: 'Book not found.' });
+    } else if (book.quantity <= 0) {
+      res.status(400).json({ error: 'Book is out of stock.' });
+    } else {
+      // Update stock and perform the purchase
+      const updatePayload = { quantity: book.quantity - 1 };
+      await axios.put(`${catalogServiceUrl}/update/${bookId}`, updatePayload);
+
+      res.json({ message: 'Book purchase successful' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to check stock availability or update book stock.' });
+  }
+};
