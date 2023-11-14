@@ -30,9 +30,9 @@ exports.searchBooks = async (req, res) => {
 
 
 exports.purchase = async (req, res) => {
-    const { itemNumber } = req.params;
+    const { book_id } = req.params;
     try {
-      const response = await axios.get(`${orderServiceUrl}/buy/${itemNumber}`);
+      const response = await axios.get(`${orderServiceUrl}/buy/${book_id}`);
     const data = response.data;
     res.json(data);
       res.json({ message: 'Purchase successful' });

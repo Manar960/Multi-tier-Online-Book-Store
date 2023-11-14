@@ -22,37 +22,32 @@ const db = require('./db');
     });
   };
 
-  exports.update = async (req, res) => {
-    const { item_number } = req.params;
-    const { cost, quantity } = req.body;
-  
-    if (!cost && !quantity) {
-      res.status(400).json({ error: 'Missing parameters for update.' });
-      return;
-    }
-  
-    const updateQuery = 'UPDATE books SET ' +
-      (cost ? 'cost = ? ' : '') +
-      (cost && quantity ? ', ' : '') +
-      (quantity ? 'quantity = ? ' : '') +
-      'WHERE id = ?';
-  
-    const params = [];
-    if (cost) params.push(cost);
-    if (quantity) params.push(quantity);
-    params.push(item_number);
-  
-    db.run(updateQuery, params, function (err) {
-      if (err) {
-        res.status(500).json({ error: 'Failed to update data in the catalog.' });
-        return;
-      }
-  
-      if (this.changes === 0) {
-        res.status(404).json({ error: 'Book not found for update.' });
-      } else {
-        res.json({ status: 'success' });
-      }
-    });
-  };
 
+  exports.purchase = async (req, res) => {
+    const bookId = req.params.book_id;
+  
+    db.serialize(() => {
+      // Check if the book is in stock
+      db.get('SELECT stock FROM books WHERE id = ?', [bookId], (err, book) => {
+        if (err) {
+          console.error(err.message);
+          res.status(500).json({ error: 'Failed to check stock availability.' });
+        } else if (!book) {
+          res.status(404).json({ error: 'Book not found.' });
+        } else if (book.stock <= 0) {
+          res.status(400).json({ error: 'Book is out of stock.' });
+        } else {
+          // Update stock and perform the purchase
+          db.run('UPDATE books SET stock = stock - 1 WHERE id = ?', [bookId], (updateErr) => {
+            if (updateErr) {
+              console.error(updateErr.message);
+              res.status(500).json({ error: 'Failed to update book stock.' });
+            } else {
+              res.json({ message: 'Book purchase successful' });
+            }
+          });
+        }
+      });
+    });
+  }
+  
