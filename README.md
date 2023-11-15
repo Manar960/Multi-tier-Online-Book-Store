@@ -20,6 +20,16 @@ FrontEnd APIs
 | `/search/:topic` | `Get` | search for books by their `<topic>`, returns all matching books itemNumber and tittle. |
 | `/buy/:book_id` | `Post` | buy a book by its `<book_id>` |
 
+Catalog Server APIs 
+| URL | Method | Description |
+|----------|----------|----------|
+| `/query/info/:item_number` | `Get` | query all information about a book by its `<item_number>`, returns `JSON` object represinting matching books information. |
+| `/query/search/:topic` | `Get` | query all the books with the specified `<topic>`, returns `JSON` object represinting matching books information. |
+| `/update/:book_id` | `Post` | update the stock for book by its `<book_id>` |
 
+Order Server APIs 
+| URL | Method | Description |
+|----------|----------|----------|
+| `/buy/:book_id` | `Post` | send query for catalog server to buy a book by its `<book_id>` |
 
 
