@@ -13,21 +13,21 @@ functions as a microservice dedicated to managing and providing information abou
 This project was developed using Node.js and the Express framework, leveraging its support for building lightweight microservices. The choice of the SQLite database was intentional, as it provides a simpler and more lightweight solution for data storage, aligning with the goal of creating a streamlined and efficient program architecture.
 
 # APIs
-FrontEnd APIs 
+**FrontEnd APIs**
 | URL | Method | Description |
 |----------|----------|----------|
 | `/info/:item_number` | `Get` | get information about a book by its `<item_number>` |
 | `/search/:topic` | `Get` | search for books by their `<topic>`, returns all matching books itemNumber and tittle. |
 | `/buy/:book_id` | `Post` | buy a book by its `<book_id>` |
 
-Catalog Server APIs 
+**Catalog Server APIs** 
 | URL | Method | Description |
 |----------|----------|----------|
 | `/query/info/:item_number` | `Get` | query all information about a book by its `<item_number>`, returns `JSON` object represinting matching books information. |
 | `/query/search/:topic` | `Get` | query all the books with the specified `<topic>`, returns `JSON` object represinting matching books information. |
 | `/update/:book_id` | `Post` | update the stock for book by its `<book_id>` |
 
-Order Server APIs 
+**Order Server APIs** 
 | URL | Method | Description |
 |----------|----------|----------|
 | `/buy/:book_id` | `Post` | send query for catalog server to buy a book by its `<book_id>` |
