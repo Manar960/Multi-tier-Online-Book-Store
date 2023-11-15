@@ -9,4 +9,17 @@ functions as a microservice dedicated to managing and providing information abou
 
 3-Frontend Server: Initial point of contact for user requests and orchestrates interactions between the user interface and the backend services. Implemented as a microservice, the front-end server supports a variety of user operations through a RESTful API. 
 
+# Implementation
+This project was developed using Node.js and the Express framework, leveraging its support for building lightweight microservices. The choice of the SQLite database was intentional, as it provides a simpler and more lightweight solution for data storage, aligning with the goal of creating a streamlined and efficient program architecture.
+
+# APIs
+FrontEnd APIs 
+| URL | Method | Description |
+|----------|----------|----------|
+| `/info/:item_number` | `Get` | get information about a book by its `<item_number>` |
+| `/search/:topic` | `Get` | search for books by their `<topic>`, returns all matching books itemNumber and tittle. |
+| `/buy/:book_id` | `Post` | buy a book by its `<book_id>` |
+
+
+
 
