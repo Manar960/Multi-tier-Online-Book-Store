@@ -11,7 +11,7 @@ services:
 
   catalog:
     build:
-      context: ./catalog
+      context: ./catalog-server
     ports:
       - "3004:3004"
     expose:
@@ -19,7 +19,7 @@ services:
 
   order:
     build:
-      context: ./order
+      context: ./order-server
     ports:
       - "3007:3007"
     expose:
