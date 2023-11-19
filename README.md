@@ -39,18 +39,18 @@ Download the file and place each server in a different project, configuring it f
 for `catalog-server` do same thing It will work on port `3004`. for `order-server` It will work on port `3007`.
 
 # Testing
-Frontend address: `http://localhost:3001`.
+Frontend address: `http://localhost:3001`.<br>
 
-catalog-server address: `http://localhost:3004`.
+catalog-server address: `http://localhost:3004`.<br>
 
-order-server address: `http://localhost:3007`.
+order-server address: `http://localhost:3007`.<br>
 
 **Search for books by topic**
 `http://localhost:3001/search/distributed%20systems`
 
 **Ask for inforamtion about a selected book**
 `http://localhost:3001/info/1`
-https://github.com/Manar960/Multi-tier-Online-Book-Store/blob/main/images/1.png?raw=true
+![](https://github.com/Manar960/Multi-tier-Online-Book-Store/blob/main/images/1.png?raw=true)
 
 **Buy Books**
 `http://localhost:3001/buy/1`
