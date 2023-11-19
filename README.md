@@ -32,4 +32,25 @@ This project was developed using Node.js and the Express framework, leveraging i
 |----------|----------|----------|
 | `/buy/:book_id` | `Post` | send query for catalog server to buy a book by its `<book_id>` |
 
+# usage
+
+The project deals with Database sqlite3, so you must download this dependency on your device
+Download the file and place each server in a different project, configuring it for Node.js and Framework Express, to run the `front-end server`. Type `node app.js` It will work on port `3001`.
+for `catalog-server` do same thing It will work on port `3004`. for `order-server` It will work on port `3007`.
+
+# Testing
+Frontend address: `http://localhost:3001`
+catalog-server address: `http://localhost:3004`
+order-server address: `http://localhost:3007`
+
+**Search for books by topic**
+`http://localhost:3001/search/distributed%20systems`
+
+**Ask for inforamtion about a selected book**
+`http://localhost:3001/info/1`
+
+**Buy Books**
+`http://localhost:3001/buy/1`
+
+
 
