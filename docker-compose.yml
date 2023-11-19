@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3001:3001"
+    expose:
+      - 3001
+
+  catalog:
+    build:
+      context: ./catalog
+    ports:
+      - "3004:3004"
+    expose:
+      - 3004
+
+  order:
+    build:
+      context: ./order
+    ports:
+      - "3007:3007"
+    expose:
+      - 3007
