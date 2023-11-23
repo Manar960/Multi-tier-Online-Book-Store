@@ -30,9 +30,17 @@ exports.searchBooks = async (req, res) => {
 
 
 exports.purchase = async (req, res) => {
+<<<<<<< HEAD
     const { item_number } = req.params;
     try {
       const response = await axios.post(`${orderServiceUrl}/buy/${item_number}`);
+=======
+    const { book_id } = req.params;
+    try {
+      const response = await axios.get(`${orderServiceUrl}/buy/${book_id}`);
+    const data = response.data;
+    res.json(data);
+>>>>>>> 386e0bd0e03ee3467d4091428ceead3e5dea1a3e
       res.json({ message: 'Purchase successful' });
     } catch (error) {
       res.status(500).json({ error: 'Failed to process the purchase.' });
