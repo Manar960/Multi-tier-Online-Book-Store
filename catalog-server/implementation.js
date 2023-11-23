@@ -69,3 +69,4 @@ exports.update = async (req, res) => {
       res.json({ status: 'success' });
     });
 };
+

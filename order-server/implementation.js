@@ -26,3 +26,4 @@ else {
     res.status(500).json({ error: 'Failed to check stock availability or update book stock.' });
   }
 };
+
