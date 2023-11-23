@@ -60,9 +60,9 @@ exports.update = async (req, res) => {
     })
     .on('end', () => {
       const writeStream = fs.createWriteStream(csvFilePath);
-      writeStream.write('id,title,topic,cost,quantity\n'); // CSV header
+      writeStream.write('id,title,topic,cost,quantity\n');
       updatedBooks.forEach((row) => {
-        writeStream.write(`${row.id},${row.title},${row.author},${row.topic},${row.cost},${row.quantity}\n`);
+        writeStream.write(`${row.id},${row.title},${row.topic},${row.cost},${row.quantity}\n`);
       });
       writeStream.end();
 
