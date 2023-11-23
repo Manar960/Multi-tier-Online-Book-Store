@@ -4,9 +4,9 @@ const orderServiceUrl = 'http://localhost:3007';
 const catalogServiceUrl = 'http://localhost:3004';
 
 exports.info = async (req, res) => {
-  const { itemNumber } = req.params;
+  const { item_number } = req.params;
   try {
-    const response = await axios.get(`${catalogServiceUrl}/info/${itemNumber}`);
+    const response = await axios.get(`${catalogServiceUrl}/info/${item_number}`);
     const data = response.data;
     res.json(data);
   } catch (error) {
@@ -30,11 +30,9 @@ exports.searchBooks = async (req, res) => {
 
 
 exports.purchase = async (req, res) => {
-    const { itemNumber } = req.params;
+    const { item_number } = req.params;
     try {
-      const response = await axios.get(`${orderServiceUrl}/buy/${itemNumber}`);
-    const data = response.data;
-    res.json(data);
+      const response = await axios.post(`${orderServiceUrl}/buy/${item_number}`);
       res.json({ message: 'Purchase successful' });
     } catch (error) {
       res.status(500).json({ error: 'Failed to process the purchase.' });
