@@ -1,5 +1,5 @@
 id,title,topic,cost,quantity
-1,How to get a good grade in DOS in 40 minutes a day,distributed systems,29,50
-2,RPCs for Noobs,distributed systems,30,40
-3,Xen and the Art of Surviving Undergraduate School,undergraduate school,35,29
+1,How to get a good grade in DOS in 40 minutes a day,distributed systems,30,100
+2,RPCs for Noobs,distributed systems,30,38
+3,Xen and the Art of Surviving Undergraduate School,undergraduate school,35,27
 4,Cooking for the Impatient Undergrad,undergraduate school,40,19
