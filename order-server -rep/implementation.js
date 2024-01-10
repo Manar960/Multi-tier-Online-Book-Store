@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const catalogServiceUrl = 'http://localhost:3004';
+const catalogServiceUrl = 'http://localhost:3010';
 
 exports.purchase = async (req, res) => {
   const item_number = req.params.book_id;

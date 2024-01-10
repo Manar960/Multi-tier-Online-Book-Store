@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "axios": "^1.6.1",
+    "body-parser": "^1.20.2",
+    "csv-parser": "^3.0.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "sequelize": "^6.34.0",
+    "sqlite3": "^5.1.6"
+  },
+  "name": "multi-tier-online-book-store",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Manar960/Multi-tier-Online-Book-Store.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Manar960/Multi-tier-Online-Book-Store/issues"
+  },
+  "homepage": "https://github.com/Manar960/Multi-tier-Online-Book-Store#readme"
+}
