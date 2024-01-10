@@ -38,12 +38,19 @@ The project deals with Database sqlite3, so you must download this dependency on
 Download the file and place each server in a different project, configuring it for Node.js and Framework Express, to run the `front-end server`. Type `node app.js` It will work on port `3001`.
 for `catalog-server` do same thing It will work on port `3004`. for `order-server` It will work on port `3007`.
 
+run all the servers alone 
+
 # Testing
 Frontend address: `http://localhost:3001`.<br>
 
 catalog-server address: `http://localhost:3004`.<br>
 
+catalog-server rep address: `http://localhost:3010`.<br>
+
 order-server address: `http://localhost:3007`.<br>
+
+order-server rep address: `http://localhost:3011`.<br>
+
 
 **Search for books by topic**
 `http://localhost:3001/search/distributed%20systems`<br>
