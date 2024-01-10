@@ -1,8 +1,8 @@
 const axios = require('axios');
 const crypto = require('crypto');
 
-const orderServiceUrl = 'http://localhost:3007'; 
-const catalogServiceUrl = 'http://localhost:3004';
+const orderServiceUrl = 'http://order:3007'; 
+const catalogServiceUrl = 'http://catalog:3004';
 
 class Cache {
   constructor(maxItems = 10) {
