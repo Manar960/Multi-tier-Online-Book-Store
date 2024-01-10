@@ -3,8 +3,8 @@ const csv = require('csv-parser');
 const axios = require('axios');
 
 
-const csvFilePath = 'books.csv';
-const replicaUrl = 'http://localhost:3010';
+const csvFilePath = 'books2.csv';
+const replicaUrl = 'http://localhost:3004';
 
 exports.info = async (req, res) => {
   const { item_number } = req.params;
